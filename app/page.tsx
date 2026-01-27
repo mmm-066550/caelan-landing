@@ -21,26 +21,14 @@ export default function Home() {
       quote: "It's simple, clear, and doesn't feel complicated. Staff picked it up quickly without needing much explanation.",
       name: "Mercy Okaye",
       role: "Registered Manager",
-      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop"
+      image: "/assets/images/testimonial.png"
     },
-    {
-      quote: "The platform has transformed how we manage our care services. Everything we need is in one place.",
-      name: "John Smith",
-      role: "Care Director",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop"
-    },
-    {
-      quote: "Our team's efficiency has improved significantly since implementing this system.",
-      name: "Sarah Johnson",
-      role: "Operations Manager",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop"
-    }
   ];
 
   const contactCards = [
     {
       icon: HiLocationMarker,
-      text: "Essex, United Kingdom",
+      text: "Office 1, Church Walk House, Great Oaks, Basildon SS14 1GJ, United Kingdom",
       showExternalLink: true,
       iconBg: "bg-[#0B2230]",
       iconColor: "text-white"
@@ -48,20 +36,20 @@ export default function Home() {
     {
       icon: HiMail,
       text: "hello@caelan.com",
-      showExternalLink: false,
+      showExternalLink: true,
       iconBg: "bg-[#0B2230]",
       iconColor: "text-white"
     },
     {
       icon: FaLinkedin,
       text: "Caelan care",
-      showExternalLink: false,
+      showExternalLink: true,
       iconBg: "bg-[#0B2230]",
       iconColor: "text-white"
     },
     {
       icon: HiPhone,
-      text: "01268 203030",
+      text: "+44 01268 203030",
       showExternalLink: false,
       iconBg: "bg-[#0B2230]",
       iconColor: "text-white"
@@ -172,7 +160,7 @@ export default function Home() {
       </motion.nav>
 
       {/* Hero Section */}
-      <section className="min-h-screen flex items-center justify-center bg-linear-to-b from-pink-50 via-purple-50 to-white relative overflow-hidden">
+      <section className="min-h-screen flex items-center justify-center bg-gradient-to-b from-pink-50 via-purple-50 to-white relative overflow-hidden">
         {/* Background Color Spots */}
         <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none">
           <div className="relative w-full max-w-[1200px] h-full">
@@ -181,7 +169,7 @@ export default function Home() {
             {/* Top Right Purple Spot */}
             <div className="absolute top-10 right-32 w-[550px] h-[550px] bg-purple-200/25 rounded-full" style={{ filter: 'blur(120px)' }}></div>
             {/* Center Blue Spot */}
-            <div className="absolute top-40 left-1/4 w-125 h-125 bg-blue-200/25 rounded-full" style={{ filter: 'blur(120px)' }}></div>
+            <div className="absolute top-40 left-1/4 w-[500px] h-[500px] bg-blue-200/25 rounded-full" style={{ filter: 'blur(120px)' }}></div>
             {/* Right Yellow Spot */}
             <div className="absolute top-32 right-20 w-[600px] h-[600px] bg-yellow-200/35 rounded-full" style={{ filter: 'blur(120px)' }}></div>
             {/* Center Purple Spot */}
@@ -403,7 +391,7 @@ export default function Home() {
 
       {/* Rostering & HR Section */}
       <section 
-        ref={(el) => { sectionRefs.current.rostering = el; }}
+        ref={(el) => (sectionRefs.current.rostering = el)}
         className="sticky top-33 bg-[#e2fafe] rounded-t-3xl transition-all duration-300" 
         style={{ 
           minHeight: isExpanded('rostering') ? '530px' : '80px', 
@@ -431,7 +419,7 @@ export default function Home() {
                 <div className="space-y-8">
                   {/* Icon and Title */}
                   <div className="flex items-start gap-8">
-                    <div className="w-16 h-16 bg-linear-to-b from-cyan-100 to-[#ffffff] rounded-2xl shadow-sm flex items-center justify-center shrink-0 border-2 border-white">
+                    <div className="w-16 h-16 bg-gradient-to-b from-cyan-100 to-[#ffffff] rounded-2xl shadow-sm flex items-center justify-center flex-shrink-0 border-2 border-white">
                       <IoCalendarSharp className="w-8 h-8 text-[#079CB6]"/>
                     </div>
                     <div className="flex-1 space-y-8 mt-3">
@@ -458,7 +446,7 @@ export default function Home() {
                         viewport={{ once: true }}
                         className="flex items-center gap-4"
                       >
-                        <div className="w-5 h-5 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: '#078C96' }}>
+                        <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#078C96' }}>
                           <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                           </svg>
@@ -497,7 +485,7 @@ export default function Home() {
 
       {/* Referral Management Section */}
       <section 
-        ref={(el) => { sectionRefs.current.referral = el; }}
+        ref={(el) => (sectionRefs.current.referral = el)}
         className="sticky top-33 bg-[#fef6e6] rounded-t-3xl transition-all duration-300" 
         style={{ 
           minHeight: isExpanded('referral') ? '530px' : '80px', 
@@ -525,7 +513,7 @@ export default function Home() {
                 <div className="space-y-8">
                   {/* Icon and Title */}
                   <div className="flex items-start gap-8">
-                    <div className="w-16 h-16 bg-linear-to-b from-yellow-100 to-[#ffffff] rounded-2xl shadow-sm flex items-center justify-center shrink-0 border-2 border-white">
+                    <div className="w-16 h-16 bg-gradient-to-b from-yellow-100 to-[#ffffff] rounded-2xl shadow-sm flex items-center justify-center flex-shrink-0 border-2 border-white">
                       <svg className="w-8 h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                       </svg>
@@ -554,7 +542,7 @@ export default function Home() {
                         viewport={{ once: true }}
                         className="flex items-center gap-4"
                       >
-                        <div className="w-5 h-5 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: '#078C96' }}>
+                        <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#078C96' }}>
                           <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                           </svg>
@@ -593,7 +581,7 @@ export default function Home() {
 
       {/* Care Planning Section */}
       <section 
-        ref={(el) => { sectionRefs.current.careplanning = el; }}
+        ref={(el) => (sectionRefs.current.careplanning = el)}
         className="sticky top-33 bg-[#f6eefb] rounded-t-3xl transition-all duration-300" 
         style={{ 
           minHeight: isExpanded('careplanning') ? '530px' : '80px', 
@@ -620,7 +608,7 @@ export default function Home() {
                 {/* Left Content */}
                 <div className="space-y-8">
                   <div className="flex items-start gap-8">
-                    <div className="w-16 h-16 bg-linear-to-b from-[#e7d0f5] to-[##FFFFFF] rounded-2xl shadow-sm flex items-center justify-center shrink-0 border-2 border-white">
+                    <div className="w-16 h-16 bg-gradient-to-b from-[#e7d0f5] to-[##FFFFFF] rounded-2xl shadow-sm flex items-center justify-center flex-shrink-0 border-2 border-white">
                       {/* <svg " fill="none" stroke="currentColor" viewBox="0 0 24 24"> */}
                         {/* <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /> */}
                       {/* </svg> */}
@@ -650,7 +638,7 @@ export default function Home() {
                             viewport={{ once: true }}
                             className="flex items-center gap-4"
                           >
-                            <div className="w-5 h-5 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: '#078C96' }}>
+                            <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#078C96' }}>
                               <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                               </svg>
@@ -689,7 +677,7 @@ export default function Home() {
 
       {/* Compliance Section */}
       <section 
-        ref={(el) => { sectionRefs.current.compliance = el; }}
+        ref={(el) => (sectionRefs.current.compliance = el)}
         className="sticky top-33 bg-[#fae9e9] rounded-t-3xl transition-all duration-300" 
         style={{ 
           minHeight: isExpanded('compliance') ? '530px' : '80px', 
@@ -717,7 +705,7 @@ export default function Home() {
                 <div className="space-y-8">
                   {/* Icon and Title */}
                   <div className="flex items-start gap-8">
-                    <div className="w-16 h-16 bg-linear-to-b from-red-100 to-[#ffffff] rounded-2xl shadow-sm flex items-center justify-center shrink-0 border-2 border-white">
+                    <div className="w-16 h-16 bg-gradient-to-b from-red-100 to-[#ffffff] rounded-2xl shadow-sm flex items-center justify-center flex-shrink-0 border-2 border-white">
                       <svg className="w-8 h-8 text-[#DF6E6E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                       </svg>
@@ -746,7 +734,7 @@ export default function Home() {
                             viewport={{ once: true }}
                             className="flex items-center gap-4"
                           >
-                            <div className="w-5 h-5 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: '#078C96' }}>
+                            <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#078C96' }}>
                               <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                               </svg>
@@ -786,7 +774,7 @@ export default function Home() {
 
       {/* Payroll & Finance Section */}
       <section 
-        ref={(el) => { sectionRefs.current.payroll = el; }}
+        ref={(el) => (sectionRefs.current.payroll = el)}
         className="sticky top-33 bg-[#ecf6ea] rounded-t-3xl transition-all duration-300" 
         style={{ 
           minHeight: isExpanded('payroll') ? '530px' : '80px', 
@@ -814,7 +802,7 @@ export default function Home() {
                 <div className="space-y-8">
                   {/* Icon and Title */}
                   <div className="flex items-start gap-8">
-                    <div className="w-16 h-16 bg-linear-to-b from-[#d7edd2] to-[#ffffff] rounded-2xl shadow-sm flex items-center justify-center shrink-0 border-2 border-white">
+                    <div className="w-16 h-16 bg-gradient-to-b from-[#d7edd2] to-[#ffffff] rounded-2xl shadow-sm flex items-center justify-center flex-shrink-0 border-2 border-white">
                       <TbReportMoney className="w-8 h-8 text-[#5DBA4C]"/>
                     </div>
                     <div className="flex-1 space-y-8 mt-3">
@@ -841,7 +829,7 @@ export default function Home() {
                             viewport={{ once: true }}
                             className="flex items-center gap-4"
                           >
-                            <div className="w-5 h-5 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: '#078C96' }}>
+                            <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#078C96' }}>
                               <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                               </svg>
@@ -880,7 +868,7 @@ export default function Home() {
 
       {/* Trainings Section */}
       <section 
-        ref={(el) => { sectionRefs.current.trainings = el; }}
+        ref={(el) => (sectionRefs.current.trainings = el)}
         className="sticky top-33 bg-[#ffecfa] rounded-t-3xl transition-all duration-300" 
         style={{ 
           minHeight: isExpanded('trainings') ? '530px' : '80px', 
@@ -908,7 +896,7 @@ export default function Home() {
                 <div className="space-y-8">
                   {/* Icon and Title */}
                   <div className="flex items-start gap-8">
-                    <div className="w-16 h-16 bg-linear-to-b from-[#ffddf6] to-[#ffffff] rounded-2xl shadow-sm flex items-center justify-center shrink-0 border-2 border-white">
+                    <div className="w-16 h-16 bg-gradient-to-b from-[#ffddf6] to-[#ffffff] rounded-2xl shadow-sm flex items-center justify-center flex-shrink-0 border-2 border-white">
                       <svg className="w-8 h-8 text-[#D31CA3]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                       </svg>
@@ -937,7 +925,7 @@ export default function Home() {
                         viewport={{ once: true }}
                         className="flex items-center gap-4"
                       >
-                        <div className="w-5 h-5 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: '#078C96' }}>
+                        <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#078C96' }}>
                           <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                           </svg>
@@ -975,7 +963,7 @@ export default function Home() {
       </section>
 
       {/* Mobile App Section */}
-      <section className="py-42 bg-linear-to-b from-[#1a2332] via-[#1e2a3a] to-[#152a35] relative overflow-hidden z-70">
+      <section className="py-42 bg-gradient-to-b from-[#1a2332] via-[#1e2a3a] to-[#152a35] relative overflow-hidden z-[70]">
         {/* Background Circle Pattern - Upper Half Only */}
         <div className="absolute top-100 left-0 right-0 h-full opacity-50 overflow-hidden">
           <Image 
@@ -990,7 +978,7 @@ export default function Home() {
         {/* Color Spots */}
         <div className="absolute top-20 left-20 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl"></div>
         <div className="absolute bottom-32 right-32 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-125 h-125 bg-cyan-400/5 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-cyan-400/5 rounded-full blur-3xl"></div>
 
         <div className="container-1200 relative z-10">
           <div className="text-center mb-30">
@@ -1001,7 +989,7 @@ export default function Home() {
               viewport={{ once: true }}
               className="text-gray-400 text-sm uppercase tracking-wider mb-4"
             >
-              Mobile App
+              Employee Mobile App
             </motion.p>
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
@@ -1016,7 +1004,7 @@ export default function Home() {
 
           <div className="relative flex items-center justify-center gap-32">
             {/* Left Side - Features */}
-            <div className="flex-1 max-w-60 flex flex-col justify-center pt-48">
+            <div className="flex-1 max-w-[240px] flex flex-col justify-center pt-48">
               <div className="space-y-24">
                 {[
                   {
@@ -1057,7 +1045,7 @@ export default function Home() {
                   >
                     <div className="text-right">
                       <div className="flex justify-end mb-3">
-                        <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center text-white shrink-0">
+                        <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center text-white flex-shrink-0">
                           {feature.icon}
                         </div>
                       </div>
@@ -1066,11 +1054,9 @@ export default function Home() {
                     </div>
                     {/* Arrow - right side of feature */}
                     <div className={`absolute -right-22 -top-8 ${index===1?'top-8':null}  -translate-y-1/2 translate-x-8 w-20 h-20`}>
-                      <Image 
+                      <img 
                         src={`/assets/images/style/arrows/${index === 0 ? 'left_bottom.svg' : index === 1 ? 'left.svg' : 'left_more_bottom.svg'}`}
                         alt="" 
-                        width={80}
-                        height={80}
                         className="w-full h-full brightness-0 invert opacity-90"
                       />
                     </div>
@@ -1080,7 +1066,7 @@ export default function Home() {
             </div>
 
             {/* Center - Phone Mockup */}
-            <div className="shrink-0">
+            <div className="flex-shrink-0">
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
@@ -1088,18 +1074,16 @@ export default function Home() {
                 viewport={{ once: true }}
                 className="relative z-10"
               >
-                <Image 
+                <img 
                   src="/assets/images/phone.svg" 
                   alt="Mobile App Interface" 
-                  width={280}
-                  height={560}
-                  className="w-70 h-auto"
+                  className="w-[280px] h-auto"
                 />
               </motion.div>
             </div>
 
             {/* Right Side - Features */}
-            <div className="flex-1 max-w-60 flex flex-col justify-start -mt-32">
+            <div className="flex-1 max-w-[240px] flex flex-col justify-start -mt-32">
               <div className="space-y-24">
                 {[
                   {
@@ -1140,7 +1124,7 @@ export default function Home() {
                   >
                     <div className="text-left">
                       <div className="flex justify-start mb-3">
-                        <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center text-white shrink-0">
+                        <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center text-white flex-shrink-0">
                           {feature.icon}
                         </div>
                       </div>
@@ -1149,11 +1133,9 @@ export default function Home() {
                     </div>
                     {/* Arrow - left side of feature */}
                     <div className="absolute -left-22 top-1/2 -translate-y-1/2 -translate-x-8 w-20 h-20">
-                      <Image 
+                      <img 
                         src={`/assets/images/style/arrows/${index === 0 ? 'right_top.svg' : index === 1 ? 'right.svg' : 'right_bottom.svg'}`}
                         alt="" 
-                        width={80}
-                        height={80}
                         className="w-full h-full brightness-0 invert"
                       />
                     </div>
@@ -1166,13 +1148,13 @@ export default function Home() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 bg-linear-to-br from-purple-50 via-pink-50 to-blue-50 relative overflow-hidden z-70">
+      <section className="py-20 bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 relative overflow-hidden z-[70]">
         {/* Background Color Spots */}
         <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none">
           <div className="relative w-full h-full">
-            <div className="absolute top-20 left-20 w-125 h-125 bg-purple-200/30 rounded-full" style={{ filter: 'blur(100px)' }}></div>
-            <div className="absolute bottom-20 right-20 w-md h-112 bg-pink-200/30 rounded-full" style={{ filter: 'blur(100px)' }}></div>
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-150 bg-blue-200/20 rounded-full" style={{ filter: 'blur(120px)' }}></div>
+            <div className="absolute top-20 left-20 w-[500px] h-[500px] bg-purple-200/30 rounded-full" style={{ filter: 'blur(100px)' }}></div>
+            <div className="absolute bottom-20 right-20 w-[450px] h-[450px] bg-pink-200/30 rounded-full" style={{ filter: 'blur(100px)' }}></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-200/20 rounded-full" style={{ filter: 'blur(120px)' }}></div>
           </div>
         </div>
 
@@ -1206,7 +1188,7 @@ export default function Home() {
                     backdropFilter: 'blur(21.55px)'
                   }}
                 >
-                  <div className="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden shrink-0 relative">
+                  <div className="w-16 h-16 bg-[#e592a2] md:w-20 md:h-20 rounded-full overflow-hidden flex-shrink-0 relative">
                     <Image 
                       src={testimonials[currentTestimonial].image}
                       alt={testimonials[currentTestimonial].name}
@@ -1232,7 +1214,7 @@ export default function Home() {
             </AnimatePresence>
 
             {/* Dots indicator */}
-            <div className="absolute -bottom-0 left-1/2 -translate-x-1/2 flex justify-center gap-2">
+            {/* <div className="absolute -bottom-0 left-1/2 -translate-x-1/2 flex justify-center gap-2">
               {testimonials.map((_, index) => (
                 <button
                   key={index}
@@ -1245,14 +1227,14 @@ export default function Home() {
                   aria-label={`Go to testimonial ${index + 1}`}
                 />
               ))}
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
 
       {/* Get in Touch Section */}
-      <section className="py-24 bg-white relative z-70">
-        <div className="w-full px-6 md:px-12 lg:px-20 max-w-[1400px] mx-auto">
+      <section className="py-24 bg-white relative z-[70]">
+        <div className="container-1200">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -1368,7 +1350,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-linear-to-b from-[#051018] from-30% to-[#174E67] text-white relative z-70 overflow-hidden" style={{ minHeight: '650px' }}>
+      <footer className="bg-gradient-to-b from-[#051018] from-30% to-[#174E67] text-white relative z-[70] overflow-hidden" style={{ minHeight: '650px' }}>
         <div className="container-1200 pt-19 flex flex-col justify-between" style={{ minHeight: '650px' }}>
           {/* Logo Row */}
           <motion.div
@@ -1379,7 +1361,7 @@ export default function Home() {
             className="mb-18"
           >
             <div className="flex items-center gap-3">
-              <Image src="/assets/images/logo_light.svg" alt="Caelan" width={184} height={48} className="w-46" />
+              <img src="assets/images/logo_light.svg" alt="Caelan" className="w-46" />
             </div>
           </motion.div>
 
@@ -1387,6 +1369,17 @@ export default function Home() {
           <div className="mb-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {contactCards.map((card, index) => {
               const IconComponent = card.icon;
+              const handleClick = () => {
+                if (card.showExternalLink) {
+                  window.open('https://www.linkedin.com/company/caelan-care', '_blank');
+                } else if (card.icon === HiMail) {
+                  window.location.href = `mailto:${card.text}`;
+                } else if (card.icon === HiLocationMarker) {
+                  window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(card.text)}`, '_blank');
+                } else if (card.icon === HiPhone) {
+                  window.location.href = `tel:${card.text}`;
+                }
+              };
               return (
                 <motion.div
                   key={index}
@@ -1394,15 +1387,16 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="bg-[#0D2636] rounded-2xl p-6 border border-[#1B3A4D] hover:border-teal-500 transition-colors group relative flex flex-col justify-center items-start gap-4 flex-1 self-stretch"
+                  onClick={handleClick}
+                  className="bg-[#0D2636] rounded-2xl p-6 border border-[#1B3A4D] hover:border-teal-500 transition-colors group relative flex flex-col justify-center items-start gap-4 flex-1 self-stretch cursor-pointer"
                 >
                   {card.showExternalLink && (
                     <FaExternalLinkAlt className="w-4 h-4 text-white absolute top-6 right-6" />
                   )}
-                  <div className={`w-12 h-12 rounded-xl ${card.iconBg} flex items-center justify-center shrink-0 group-hover:bg-teal-600 transition-colors`}>
+                  <div className={`w-12 h-12 rounded-xl ${card.iconBg} flex items-center justify-center flex-shrink-0 group-hover:bg-teal-600 transition-colors`}>
                     <IconComponent className={`w-6 h-6 ${card.iconColor} group-hover:text-white transition-colors`} />
                   </div>
-                  <p className="text-base text-white font-normal">{card.text}</p>
+                  <p className="text-sm text-white font-normal">{card.text}</p>
                 </motion.div>
               );
             })}
