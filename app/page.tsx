@@ -172,7 +172,7 @@ export default function Home() {
       </motion.nav>
 
       {/* Hero Section */}
-      <section className="min-h-screen flex items-center justify-center bg-gradient-to-b from-pink-50 via-purple-50 to-white relative overflow-hidden">
+      <section className="min-h-screen flex items-center justify-center bg-linear-to-b from-pink-50 via-purple-50 to-white relative overflow-hidden">
         {/* Background Color Spots */}
         <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none">
           <div className="relative w-full max-w-[1200px] h-full">
@@ -403,7 +403,7 @@ export default function Home() {
 
       {/* Rostering & HR Section */}
       <section 
-        ref={(el) => (sectionRefs.current.rostering = el)}
+        ref={(el) => { sectionRefs.current.rostering = el; }}
         className="sticky top-33 bg-[#e2fafe] rounded-t-3xl transition-all duration-300" 
         style={{ 
           minHeight: isExpanded('rostering') ? '530px' : '80px', 
@@ -431,7 +431,7 @@ export default function Home() {
                 <div className="space-y-8">
                   {/* Icon and Title */}
                   <div className="flex items-start gap-8">
-                    <div className="w-16 h-16 bg-gradient-to-b from-cyan-100 to-[#ffffff] rounded-2xl shadow-sm flex items-center justify-center flex-shrink-0 border-2 border-white">
+                    <div className="w-16 h-16 bg-linear-to-b from-cyan-100 to-[#ffffff] rounded-2xl shadow-sm flex items-center justify-center flex-shrink-0 border-2 border-white">
                       <IoCalendarSharp className="w-8 h-8 text-[#079CB6]"/>
                     </div>
                     <div className="flex-1 space-y-8 mt-3">
@@ -497,7 +497,7 @@ export default function Home() {
 
       {/* Referral Management Section */}
       <section 
-        ref={(el) => (sectionRefs.current.referral = el)}
+        ref={(el) => { sectionRefs.current.referral = el; }}
         className="sticky top-33 bg-[#fef6e6] rounded-t-3xl transition-all duration-300" 
         style={{ 
           minHeight: isExpanded('referral') ? '530px' : '80px', 
@@ -525,7 +525,7 @@ export default function Home() {
                 <div className="space-y-8">
                   {/* Icon and Title */}
                   <div className="flex items-start gap-8">
-                    <div className="w-16 h-16 bg-gradient-to-b from-yellow-100 to-[#ffffff] rounded-2xl shadow-sm flex items-center justify-center flex-shrink-0 border-2 border-white">
+                    <div className="w-16 h-16 bg-linear-to-b from-yellow-100 to-[#ffffff] rounded-2xl shadow-sm flex items-center justify-center flex-shrink-0 border-2 border-white">
                       <svg className="w-8 h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                       </svg>
@@ -593,7 +593,7 @@ export default function Home() {
 
       {/* Care Planning Section */}
       <section 
-        ref={(el) => (sectionRefs.current.careplanning = el)}
+        ref={(el) => { sectionRefs.current.careplanning = el; }}
         className="sticky top-33 bg-[#f6eefb] rounded-t-3xl transition-all duration-300" 
         style={{ 
           minHeight: isExpanded('careplanning') ? '530px' : '80px', 
@@ -620,7 +620,7 @@ export default function Home() {
                 {/* Left Content */}
                 <div className="space-y-8">
                   <div className="flex items-start gap-8">
-                    <div className="w-16 h-16 bg-gradient-to-b from-[#e7d0f5] to-[##FFFFFF] rounded-2xl shadow-sm flex items-center justify-center flex-shrink-0 border-2 border-white">
+                    <div className="w-16 h-16 bg-linear-to-b from-[#e7d0f5] to-[##FFFFFF] rounded-2xl shadow-sm flex items-center justify-center flex-shrink-0 border-2 border-white">
                       {/* <svg " fill="none" stroke="currentColor" viewBox="0 0 24 24"> */}
                         {/* <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /> */}
                       {/* </svg> */}
@@ -689,7 +689,7 @@ export default function Home() {
 
       {/* Compliance Section */}
       <section 
-        ref={(el) => (sectionRefs.current.compliance = el)}
+        ref={(el) => { sectionRefs.current.compliance = el; }}
         className="sticky top-33 bg-[#fae9e9] rounded-t-3xl transition-all duration-300" 
         style={{ 
           minHeight: isExpanded('compliance') ? '530px' : '80px', 
@@ -717,7 +717,7 @@ export default function Home() {
                 <div className="space-y-8">
                   {/* Icon and Title */}
                   <div className="flex items-start gap-8">
-                    <div className="w-16 h-16 bg-gradient-to-b from-red-100 to-[#ffffff] rounded-2xl shadow-sm flex items-center justify-center flex-shrink-0 border-2 border-white">
+                    <div className="w-16 h-16 bg-linear-to-b from-red-100 to-[#ffffff] rounded-2xl shadow-sm flex items-center justify-center flex-shrink-0 border-2 border-white">
                       <svg className="w-8 h-8 text-[#DF6E6E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                       </svg>
@@ -786,7 +786,7 @@ export default function Home() {
 
       {/* Payroll & Finance Section */}
       <section 
-        ref={(el) => (sectionRefs.current.payroll = el)}
+        ref={(el) => { sectionRefs.current.payroll = el; }}
         className="sticky top-33 bg-[#ecf6ea] rounded-t-3xl transition-all duration-300" 
         style={{ 
           minHeight: isExpanded('payroll') ? '530px' : '80px', 
@@ -814,7 +814,7 @@ export default function Home() {
                 <div className="space-y-8">
                   {/* Icon and Title */}
                   <div className="flex items-start gap-8">
-                    <div className="w-16 h-16 bg-gradient-to-b from-[#d7edd2] to-[#ffffff] rounded-2xl shadow-sm flex items-center justify-center flex-shrink-0 border-2 border-white">
+                    <div className="w-16 h-16 bg-linear-to-b from-[#d7edd2] to-[#ffffff] rounded-2xl shadow-sm flex items-center justify-center flex-shrink-0 border-2 border-white">
                       <TbReportMoney className="w-8 h-8 text-[#5DBA4C]"/>
                     </div>
                     <div className="flex-1 space-y-8 mt-3">
@@ -880,7 +880,7 @@ export default function Home() {
 
       {/* Trainings Section */}
       <section 
-        ref={(el) => (sectionRefs.current.trainings = el)}
+        ref={(el) => { sectionRefs.current.trainings = el; }}
         className="sticky top-33 bg-[#ffecfa] rounded-t-3xl transition-all duration-300" 
         style={{ 
           minHeight: isExpanded('trainings') ? '530px' : '80px', 
@@ -908,7 +908,7 @@ export default function Home() {
                 <div className="space-y-8">
                   {/* Icon and Title */}
                   <div className="flex items-start gap-8">
-                    <div className="w-16 h-16 bg-gradient-to-b from-[#ffddf6] to-[#ffffff] rounded-2xl shadow-sm flex items-center justify-center flex-shrink-0 border-2 border-white">
+                    <div className="w-16 h-16 bg-linear-to-b from-[#ffddf6] to-[#ffffff] rounded-2xl shadow-sm flex items-center justify-center flex-shrink-0 border-2 border-white">
                       <svg className="w-8 h-8 text-[#D31CA3]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                       </svg>
@@ -975,7 +975,7 @@ export default function Home() {
       </section>
 
       {/* Mobile App Section */}
-      <section className="py-42 bg-gradient-to-b from-[#1a2332] via-[#1e2a3a] to-[#152a35] relative overflow-hidden z-[70]">
+      <section className="py-42 bg-linear-to-b from-[#1a2332] via-[#1e2a3a] to-[#152a35] relative overflow-hidden z-[70]">
         {/* Background Circle Pattern - Upper Half Only */}
         <div className="absolute top-100 left-0 right-0 h-full opacity-50 overflow-hidden">
           <Image 
@@ -1160,7 +1160,7 @@ export default function Home() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 relative overflow-hidden z-[70]">
+      <section className="py-20 bg-linear-to-br from-purple-50 via-pink-50 to-blue-50 relative overflow-hidden z-[70]">
         {/* Background Color Spots */}
         <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none">
           <div className="relative w-full h-full">
@@ -1361,7 +1361,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gradient-to-b from-[#051018] from-30% to-[#174E67] text-white relative z-[70] overflow-hidden" style={{ minHeight: '650px' }}>
+      <footer className="bg-linear-to-b from-[#051018] from-30% to-[#174E67] text-white relative z-[70] overflow-hidden" style={{ minHeight: '650px' }}>
         <div className="container-1200 pt-19 flex flex-col justify-between" style={{ minHeight: '650px' }}>
           {/* Logo Row */}
           <motion.div
