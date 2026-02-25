@@ -12,19 +12,25 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    const ZOHO_SMTP_HOST = "smtp.zoho.in";
+    const ZOHO_SMTP_PORT = 465;
+    const ZOHO_MAIL_USER = "abinash@caelan.care";
+    const ZOHO_MAIL_PASSWORD = "KwNiK9SxF3fc";
+    const ZOHO_MAIL_TO = "abinash@caelan.care";
+
     const transporter = nodemailer.createTransport({
-      host: process.env.ZOHO_SMTP_HOST || "smtp.zoho.com",
-      port: Number(process.env.ZOHO_SMTP_PORT) || 465,
+      host: ZOHO_SMTP_HOST,
+      port: ZOHO_SMTP_PORT,
       secure: true, // SSL
       auth: {
-        user: process.env.ZOHO_MAIL_USER,
-        pass: process.env.ZOHO_MAIL_PASSWORD,
+        user: ZOHO_MAIL_USER,
+        pass: ZOHO_MAIL_PASSWORD,
       },
     });
 
     await transporter.sendMail({
-      from: `"Caelan Contact Form" <${process.env.ZOHO_MAIL_USER}>`,
-      to: process.env.ZOHO_MAIL_TO || process.env.ZOHO_MAIL_USER,
+      from: `"Caelan Contact Form" <${ZOHO_MAIL_USER}>`,
+      to: ZOHO_MAIL_TO,
       replyTo: email,
       subject: `New Contact Form Submission from ${name}`,
       html: `
