@@ -29,19 +29,15 @@ export default function Home() {
     setFormStatus("sending");
     setFormError("");
     try {
-      const payload = {
-        access_key: "98dc8459-782f-438b-bdfa-0d909693e1c2",
-        subject: `New Contact Form Submission from ${formData.name}`,
-        from_name: "Caelan Contact Form",
-        name: formData.name,
-        email: formData.email,
-        company: formData.company,
-        message: formData.message,
-      };
-      const res = await fetch("https://api.web3forms.com/submit", {
+      const res = await fetch("/api/contact", {
         method: "POST",
-        headers: { "Content-Type": "application/json", "Accept": "application/json" },
-        body: JSON.stringify(payload),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          company: formData.company,
+          message: formData.message,
+        }),
       });
       const data = await res.json();
       if (!data.success) {
@@ -1707,12 +1703,7 @@ export default function Home() {
                 <form
                   className="space-y-6"
                   onSubmit={handleFormSubmit}
-                  action="https://api.web3forms.com/submit"
-                  method="POST"
                 >
-                  <input type="hidden" name="access_key" value="98dc8459-782f-438b-bdfa-0d909693e1c2" />
-                  <input type="hidden" name="subject" value="New Contact Form Submission - Caelan" />
-                  <input type="hidden" name="from_name" value="Caelan Contact Form" />
                   <motion.div
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
