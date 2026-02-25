@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
@@ -15,6 +15,46 @@ export default function Home() {
   const [inSections, setInSections] = useState(false);
   const [activeSection, setActiveSection] = useState<string>("rostering");
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
+
+  const [formData, setFormData] = useState({ name: "", email: "", company: "", message: "" });
+  const [formStatus, setFormStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [formError, setFormError] = useState("");
+
+  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setFormStatus("sending");
+    setFormError("");
+    try {
+      const payload = {
+        access_key: "98dc8459-782f-438b-bdfa-0d909693e1c2",
+        subject: `New Contact Form Submission from ${formData.name}`,
+        from_name: "Caelan Contact Form",
+        name: formData.name,
+        email: formData.email,
+        company: formData.company,
+        message: formData.message,
+      };
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      if (!data.success) {
+        throw new Error(data.message || "Something went wrong");
+      }
+      setFormStatus("success");
+      setFormData({ name: "", email: "", company: "", message: "" });
+    } catch (err: any) {
+      console.error("Form submission error:", err);
+      setFormStatus("error");
+      setFormError(err.message || "Failed to send message. Please try again.");
+    }
+  };
 
   const testimonials = [
     {
@@ -1540,120 +1580,249 @@ export default function Home() {
       </section>
 
       {/* Get in Touch Section */}
-      <section ref={getInTouchRef} className="py-12 sm:py-16 lg:py-24 bg-white relative z-[70] px-4 sm:px-6 lg:px-0">
-        <div className="container-1200 px-4 sm:px-6 lg:px-0">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="mb-12"
-          >
-            <h2 className="text-4xl md:text-5xl font-medium mb-4">
-              <span className="gradient-text-animated bg-linear-to-r from-teal-600 via-cyan-600 via-blue-600 to-purple-700 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">Get in Touch</span>
-            </h2>
-            <p className="text-gray-600 text-lg">
-              Gain clear visibility into payroll, income, costs, and financial performance across your care services.
-            </p>
-          </motion.div>
-
-          <motion.form
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="space-y-6"
-          >
+      <section ref={getInTouchRef} className="bg-white relative z-[70] px-4 sm:px-6 lg:px-0">
+        <AnimatePresence mode="wait">
+          {formStatus === "success" ? (
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              viewport={{ once: true }}
-            >
-              <label htmlFor="name" className="block text-base font-medium text-gray-700 mb-2">
-                Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                className="w-full px-5 py-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent text-base"
-                placeholder=""
-              />
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              viewport={{ once: true }}
-            >
-              <label htmlFor="email" className="block text-base font-medium text-gray-700 mb-2">
-                Email ID
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                className="w-full px-5 py-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent text-base"
-                placeholder=""
-              />
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              viewport={{ once: true }}
-            >
-              <label htmlFor="company" className="block text-base font-medium text-gray-700 mb-2">
-                Company Name <span className="text-gray-400">(Optional)</span>
-              </label>
-              <input
-                type="text"
-                id="company"
-                name="company"
-                className="w-full px-5 py-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent text-base"
-                placeholder=""
-              />
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <label htmlFor="message" className="block text-base font-medium text-gray-700 mb-2">
-                Message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                rows={6}
-                className="w-full px-5 py-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent resize-none text-base"
-                placeholder=""
-              ></textarea>
-            </motion.div>
-
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              type="submit"
-              className="w-full px-8 py-5 text-white rounded-lg text-lg font-medium transition-all flex items-center justify-center gap-2"
+              key="success"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.5 }}
+              className="flex flex-col items-center justify-center relative px-8 sm:px-16 lg:px-30 py-20"
               style={{
-                background: 'linear-gradient(90deg, #0d9488, #06b6d4, #2563eb, #7c3aed)',
-                backgroundSize: '200% auto',
-                animation: 'gradient 4s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+                background: "radial-gradient(ellipse 77.23px 265.81px at 49.5% 92.87%, rgba(255,255,255,1) 0%, rgba(244,250,251,1) 100%)",
+                minHeight: "413px",
+                gap: "48px",
               }}
             >
-              Get in Touch
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </motion.button>
-          </motion.form>
-        </div>
+              {/* Icon group - exact Figma dimensions */}
+              <div className="relative shrink-0" style={{ width: '138.425px', height: '102px' }}>
+                <div className="absolute" style={{ inset: '-163.83% -98.91% -120.97% -94.4%' }}>
+                  <svg width="407" height="393" viewBox="0 0 407 393" fill="none" xmlns="http://www.w3.org/2000/svg" className="block max-w-none w-full h-full">
+                    <foreignObject x="154.847" y="151.723" width="129.636" height="125.241"><div style={{backdropFilter:'blur(7.69px)',clipPath:'url(#bgblur_0_755_1083_clip_path)',height:'100%',width:'100%'}}></div></foreignObject>
+                    <g filter="url(#filter0_d_755_1083)">
+                      <path d="M254.272 167.104C258.205 167.104 261.978 168.666 264.759 171.448C267.54 174.229 269.103 178.002 269.103 181.935V231.373C269.103 235.306 267.54 239.078 264.759 241.86C261.978 244.641 258.205 246.204 254.272 246.204H185.059C181.125 246.204 177.353 244.641 174.571 241.86C171.79 239.078 170.228 235.306 170.228 231.373V181.935C170.228 178.002 171.79 174.229 174.571 171.448C177.353 168.666 181.125 167.104 185.059 167.104H254.272Z" fill="url(#paint0_linear_755_1083)"/>
+                    </g>
+                    <g filter="url(#filter1_f_755_1083)">
+                      <path d="M226.69 169.186C229.381 169.186 231.962 170.256 233.865 172.159C235.768 174.062 236.837 176.642 236.838 179.333V213.16C236.837 215.851 235.768 218.431 233.865 220.334C231.962 222.237 229.381 223.307 226.69 223.307H179.334C176.642 223.307 174.062 222.237 172.159 220.334C170.256 218.431 169.186 215.851 169.186 213.16V179.333C169.186 176.642 170.256 174.062 172.159 172.159C174.062 170.256 176.642 169.186 179.334 169.186H226.69Z" fill="url(#paint1_linear_755_1083)"/>
+                    </g>
+                    <foreignObject x="115.297" y="174.623" width="129.636" height="125.242"><div style={{backdropFilter:'blur(7.69px)',clipPath:'url(#bgblur_1_755_1083_clip_path)',height:'100%',width:'100%'}}></div></foreignObject>
+                    <g filter="url(#filter2_d_755_1083)">
+                      <path fillRule="evenodd" clipRule="evenodd" d="M145.509 269.104C141.575 269.104 137.803 267.541 135.021 264.76C132.24 261.979 130.677 258.206 130.677 254.273V204.835C130.677 200.902 132.24 197.129 135.021 194.348C137.803 191.566 141.575 190.004 145.509 190.004H214.721C218.655 190.004 222.427 191.566 225.209 194.348C227.99 197.129 229.553 200.902 229.553 204.835V254.273C229.553 258.206 227.99 261.979 225.209 264.76C222.427 267.541 218.655 269.104 214.721 269.104H145.509ZM158.486 210.867C157.982 210.437 157.398 210.112 156.766 209.912C156.135 209.713 155.47 209.642 154.81 209.704C154.151 209.767 153.511 209.961 152.928 210.275C152.346 210.59 151.832 211.018 151.418 211.535C151.004 212.052 150.698 212.646 150.518 213.284C150.338 213.921 150.288 214.588 150.371 215.245C150.454 215.902 150.668 216.536 151 217.108C151.333 217.681 151.777 218.181 152.306 218.579L170.845 233.415C173.476 235.521 176.745 236.669 180.115 236.669C183.485 236.669 186.754 235.521 189.385 233.415L207.924 218.584C208.431 218.178 208.853 217.676 209.166 217.107C209.479 216.538 209.677 215.913 209.749 215.268C209.82 214.623 209.764 213.969 209.583 213.346C209.403 212.722 209.101 212.14 208.695 211.633C208.289 211.126 207.787 210.704 207.218 210.39C206.65 210.077 206.025 209.879 205.379 209.808C204.734 209.736 204.08 209.792 203.457 209.973C202.833 210.154 202.251 210.456 201.744 210.862L183.205 225.693C182.328 226.395 181.238 226.777 180.115 226.777C178.992 226.777 177.902 226.395 177.025 225.693L158.486 210.867Z" fill="url(#paint2_linear_755_1083)" shapeRendering="crispEdges"/>
+                      <path d="M145.509 191.927H214.721C218.145 191.927 221.429 193.286 223.849 195.707C226.27 198.128 227.63 201.411 227.63 204.835V254.272C227.63 257.696 226.27 260.98 223.849 263.4C221.429 265.821 218.145 267.182 214.721 267.182H145.509C142.085 267.182 138.801 265.821 136.381 263.4C133.96 260.98 132.6 257.696 132.6 254.272V204.835C132.6 201.411 133.96 198.128 136.381 195.707C138.801 193.286 142.085 191.927 145.509 191.927ZM157.345 208.079C156.469 207.802 155.545 207.704 154.63 207.79C153.714 207.877 152.825 208.146 152.015 208.583C151.206 209.02 150.493 209.615 149.918 210.333C149.343 211.051 148.917 211.877 148.668 212.762C148.418 213.647 148.349 214.573 148.464 215.485C148.579 216.398 148.876 217.278 149.338 218.073C149.79 218.852 150.391 219.533 151.105 220.079V220.08L169.644 234.916C172.616 237.295 176.309 238.591 180.115 238.591C183.803 238.591 187.384 237.375 190.305 235.136L190.586 234.916L209.125 220.085C209.829 219.521 210.415 218.824 210.85 218.034C211.285 217.244 211.56 216.377 211.66 215.48C211.759 214.584 211.681 213.677 211.429 212.811C211.178 211.944 210.76 211.136 210.196 210.432C209.633 209.727 208.935 209.141 208.145 208.706C207.355 208.271 206.488 207.996 205.592 207.896C204.695 207.797 203.788 207.876 202.922 208.127C202.164 208.347 201.45 208.695 200.811 209.156L200.543 209.36L182.004 224.191V224.192C181.468 224.621 180.801 224.854 180.115 224.854C179.429 224.854 178.762 224.621 178.226 224.192V224.191L159.687 209.365H159.686C158.998 208.788 158.203 208.35 157.345 208.079Z" stroke="url(#paint3_linear_755_1083)" strokeWidth="3.84514" shapeRendering="crispEdges"/>
+                    </g>
+                    <defs>
+                      <filter id="filter0_d_755_1083" x="154.847" y="151.723" width="129.636" height="125.241" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                        <feFlood floodOpacity="0" result="BackgroundImageFix"/>
+                        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                        <feOffset dy="15.3806"/>
+                        <feGaussianBlur stdDeviation="7.69028"/>
+                        <feComposite in2="hardAlpha" operator="out"/>
+                        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_755_1083"/>
+                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_755_1083" result="shape"/>
+                      </filter>
+                      <clipPath id="bgblur_0_755_1083_clip_path" transform="translate(-154.847 -151.723)"><path d="M254.272 167.104C258.205 167.104 261.978 168.666 264.759 171.448C267.54 174.229 269.103 178.002 269.103 181.935V231.373C269.103 235.306 267.54 239.078 264.759 241.86C261.978 244.641 258.205 246.204 254.272 246.204H185.059C181.125 246.204 177.353 244.641 174.571 241.86C171.79 239.078 170.228 235.306 170.228 231.373V181.935C170.228 178.002 171.79 174.229 174.571 171.448C177.353 168.666 181.125 167.104 185.059 167.104H254.272Z"/></clipPath>
+                      <filter id="filter1_f_755_1083" x="0" y="0" width="406.024" height="392.493" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                        <feFlood floodOpacity="0" result="BackgroundImageFix"/>
+                        <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+                        <feGaussianBlur stdDeviation="84.5931" result="effect1_foregroundBlur_755_1083"/>
+                      </filter>
+                      <filter id="filter2_d_755_1083" x="115.297" y="174.623" width="129.636" height="125.242" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                        <feFlood floodOpacity="0" result="BackgroundImageFix"/>
+                        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                        <feOffset dy="15.3806"/>
+                        <feGaussianBlur stdDeviation="7.69028"/>
+                        <feComposite in2="hardAlpha" operator="out"/>
+                        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_755_1083"/>
+                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_755_1083" result="shape"/>
+                      </filter>
+                      <clipPath id="bgblur_1_755_1083_clip_path" transform="translate(-115.297 -174.623)"><path fillRule="evenodd" clipRule="evenodd" d="M145.509 269.104C141.575 269.104 137.803 267.541 135.021 264.76C132.24 261.979 130.677 258.206 130.677 254.273V204.835C130.677 200.902 132.24 197.129 135.021 194.348C137.803 191.566 141.575 190.004 145.509 190.004H214.721C218.655 190.004 222.427 191.566 225.209 194.348C227.99 197.129 229.553 200.902 229.553 204.835V254.273C229.553 258.206 227.99 261.979 225.209 264.76C222.427 267.541 218.655 269.104 214.721 269.104H145.509ZM158.486 210.867C157.982 210.437 157.398 210.112 156.766 209.912C156.135 209.713 155.47 209.642 154.81 209.704C154.151 209.767 153.511 209.961 152.928 210.275C152.346 210.59 151.832 211.018 151.418 211.535C151.004 212.052 150.698 212.646 150.518 213.284C150.338 213.921 150.288 214.588 150.371 215.245C150.454 215.902 150.668 216.536 151 217.108C151.333 217.681 151.777 218.181 152.306 218.579L170.845 233.415C173.476 235.521 176.745 236.669 180.115 236.669C183.485 236.669 186.754 235.521 189.385 233.415L207.924 218.584C208.431 218.178 208.853 217.676 209.166 217.107C209.479 216.538 209.677 215.913 209.749 215.268C209.82 214.623 209.764 213.969 209.583 213.346C209.403 212.722 209.101 212.14 208.695 211.633C208.289 211.126 207.787 210.704 207.218 210.39C206.65 210.077 206.025 209.879 205.379 209.808C204.734 209.736 204.08 209.792 203.457 209.973C202.833 210.154 202.251 210.456 201.744 210.862L183.205 225.693C182.328 226.395 181.238 226.777 180.115 226.777C178.992 226.777 177.902 226.395 177.025 225.693L158.486 210.867Z"/></clipPath>
+                      <linearGradient id="paint0_linear_755_1083" x1="259.736" y1="238.918" x2="151.494" y2="149.41" gradientUnits="userSpaceOnUse">
+                        <stop stopColor="#078C96"/>
+                        <stop offset="1" stopColor="white"/>
+                      </linearGradient>
+                      <linearGradient id="paint1_linear_755_1083" x1="230.428" y1="218.322" x2="156.368" y2="157.08" gradientUnits="userSpaceOnUse">
+                        <stop stopColor="#FF0000"/>
+                        <stop offset="1" stopColor="white"/>
+                      </linearGradient>
+                      <linearGradient id="paint2_linear_755_1083" x1="115.846" y1="277.014" x2="205.467" y2="169.859" gradientUnits="userSpaceOnUse">
+                        <stop stopColor="white" stopOpacity="0.2"/>
+                        <stop offset="1" stopColor="white" stopOpacity="0.5"/>
+                      </linearGradient>
+                      <linearGradient id="paint3_linear_755_1083" x1="219.665" y1="277.014" x2="152.792" y2="177.17" gradientUnits="userSpaceOnUse">
+                        <stop stopColor="white" stopOpacity="0"/>
+                        <stop offset="1" stopColor="white"/>
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                </div>
+              </div>
+
+              {/* Check badge - positioned like Figma: absolute left=630px from 1200px container, top=129px */}
+              <div className="absolute" style={{ left: '52.5%', top: '129px', width: '60px', height: '60px' }}>
+                <svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg" className="block max-w-none w-full h-full" style={{ margin: '0 -20% -40% -20%', width: '140%', height: '140%' }}>
+                  <circle cx="48" cy="38" r="26" fill="white" stroke="#078C96" strokeWidth="3"/>
+                  <path d="M36 38L44 46L60 30" stroke="#078C96" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+
+              {/* Text */}
+              <div className="flex flex-col items-center" style={{ gap: '24px' }}>
+                <h2 className="font-bold text-[#078C96] text-center" style={{ fontSize: '40px', lineHeight: '50px' }}>
+                  Request sent Successfully..!
+                </h2>
+                <p className="font-normal text-[#5E7284] text-center" style={{ fontSize: '18px', lineHeight: '29px' }}>
+                  Our team will reach out to you shortly.
+                </p>
+              </div>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="form"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="py-12 sm:py-16 lg:py-24"
+            >
+              <div className="container-1200 px-4 sm:px-6 lg:px-0">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                  viewport={{ once: true }}
+                  className="mb-12"
+                >
+                  <h2 className="text-4xl md:text-5xl font-medium mb-4">
+                    <span className="gradient-text-animated bg-linear-to-r from-teal-600 via-cyan-600 via-blue-600 to-purple-700 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">Get in Touch</span>
+                  </h2>
+                  <p className="text-gray-600 text-lg">
+                    Gain clear visibility into payroll, income, costs, and financial performance across your care services.
+                  </p>
+                </motion.div>
+
+                <form
+                  className="space-y-6"
+                  onSubmit={handleFormSubmit}
+                  action="https://api.web3forms.com/submit"
+                  method="POST"
+                >
+                  <input type="hidden" name="access_key" value="98dc8459-782f-438b-bdfa-0d909693e1c2" />
+                  <input type="hidden" name="subject" value="New Contact Form Submission - Caelan" />
+                  <input type="hidden" name="from_name" value="Caelan Contact Form" />
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                    viewport={{ once: true }}
+                  >
+                    <label htmlFor="name" className="block text-base font-medium text-gray-700 mb-2">
+                      Name
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleFormChange}
+                      required
+                      className="w-full px-5 py-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent text-base text-black"
+                      placeholder=""
+                    />
+                  </motion.div>
+
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: 0.4 }}
+                    viewport={{ once: true }}
+                  >
+                    <label htmlFor="email" className="block text-base font-medium text-gray-700 mb-2">
+                      Email ID
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleFormChange}
+                      required
+                      className="w-full px-5 py-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent text-base text-black"
+                      placeholder=""
+                    />
+                  </motion.div>
+
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: 0.5 }}
+                    viewport={{ once: true }}
+                  >
+                    <label htmlFor="company" className="block text-base font-medium text-gray-700 mb-2">
+                      Company Name <span className="text-gray-400">(Optional)</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="company"
+                      name="company"
+                      value={formData.company}
+                      onChange={handleFormChange}
+                      className="w-full px-5 py-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent text-base text-black"
+                      placeholder=""
+                    />
+                  </motion.div>
+
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: 0.6 }}
+                    viewport={{ once: true }}
+                  >
+                    <label htmlFor="message" className="block text-base font-medium text-gray-700 mb-2">
+                      Message
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      rows={6}
+                      value={formData.message}
+                      onChange={handleFormChange}
+                      required
+                      className="w-full px-5 py-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent resize-none text-base text-black"
+                      placeholder=""
+                      style={{color:'black !important'}}
+                    ></textarea>
+                  </motion.div>
+
+                  {formStatus === "error" && (
+                    <p className="text-red-600 font-medium text-center py-3 bg-red-50 rounded-lg">{formError}</p>
+                  )}
+
+                  <button
+                    type="submit"
+                    disabled={formStatus === "sending"}
+                    className="w-full px-8 py-5 text-white rounded-lg text-lg font-medium transition-all flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+                    style={{
+                      background: 'linear-gradient(90deg, #0d9488, #06b6d4, #2563eb, #7c3aed)',
+                      backgroundSize: '200% auto',
+                      animation: 'gradient 4s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+                    }}
+                  >
+                    {formStatus === "sending" ? "Sending..." : "Get in Touch"}
+                    {formStatus !== "sending" && (
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    )}
+                  </button>
+                </form>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </section>
 
       {/* Footer */}
@@ -1677,12 +1846,12 @@ export default function Home() {
             {contactCards.map((card, index) => {
               const IconComponent = card.icon;
               const handleClick = () => {
-                if (card.showExternalLink) {
-                  window.open('https://www.linkedin.com/company/caelan-care', '_blank');
+                if (card.icon === HiLocationMarker) {
+                  window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(card.text)}`, '_blank');
                 } else if (card.icon === HiMail) {
                   window.location.href = `mailto:${card.text}`;
-                } else if (card.icon === HiLocationMarker) {
-                  window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(card.text)}`, '_blank');
+                } else if (card.icon === FaLinkedin) {
+                  window.open('https://www.linkedin.com/company/caelan-care', '_blank');
                 } else if (card.icon === HiPhone) {
                   window.location.href = `tel:${card.text}`;
                 }
